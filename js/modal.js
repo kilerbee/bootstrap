@@ -42,6 +42,7 @@
   Modal.DEFAULTS = {
     backdrop: true,
     keyboard: true,
+    focus: true,
     show: true
   }
 
@@ -100,6 +101,9 @@
       transition ?
         that.$dialog // wait for modal to slide in
           .one('bsTransitionEnd', function () {
+            if (that.options.focus) {
+              that.$element.focus();
+            }
             that.$element.trigger('focus').trigger(e)
           })
           .emulateTransitionEnd(Modal.TRANSITION_DURATION) :
